@@ -75,22 +75,22 @@ void DeckTest_initComplete (void) {
 
 // //-----------------------------------------------------------------------------
 
-// void DeckTest_appendPips (void) {
-//   Deck d; Deck_initEmpty (& d);
-//   Deck_appendPips (& d, "2c 3d 4h");
-//   assert (d.length == 3);
-//   assert (Card_pipEquals (d.cards[0], "2c"));
-//   assert (Card_pipEquals (d.cards[1], "3d"));
-//   assert (Card_pipEquals (d.cards[2], "4h"));
-// }
+void DeckTest_appendPips (void) {
+  Deck d; Deck_initEmpty (& d);
+  Deck_appendPips (& d, "2c 3d 4h");
+  assert (d.length == 3);
+  assert (Card_pipEquals (d.cards[0], "2c"));
+  assert (Card_pipEquals (d.cards[1], "3d"));
+  assert (Card_pipEquals (d.cards[2], "4h"));
+}
 
-// void DeckTest_initFromPips (void) {
-//   Deck d; Deck_initFromPips (& d, "2c 3d 4h");
-//   assert (d.length == 3);
-//   assert (Card_pipEquals (d.cards[0], "2c"));
-//   assert (Card_pipEquals (d.cards[1], "3d"));
-//   assert (Card_pipEquals (d.cards[2], "4h"));
-// }
+void DeckTest_initFromPips (void) {
+  Deck d; Deck_initFromPips (& d, "2c 3d 4h");
+  assert (d.length == 3);
+  assert (Card_pipEquals (d.cards[0], "2c"));
+  assert (Card_pipEquals (d.cards[1], "3d"));
+  assert (Card_pipEquals (d.cards[2], "4h"));
+}
 
 // //-----------------------------------------------------------------------------
 
@@ -104,35 +104,35 @@ void DeckTest_pipsEqual (void) {
 
 // //-----------------------------------------------------------------------------
 
-// void DeckTest_indexIsValid (void) {
-//   Deck d; Deck_initFromPips (& d, "2c 3d 4h");
+void DeckTest_indexIsValid (void) {
+  Deck d; Deck_initFromPips (& d, "2c 3d 4h");
 
-//   assert ( ! Deck_indexIsValid (& d, -1));
-//   assert (   Deck_indexIsValid (& d,  0));
-//   assert (   Deck_indexIsValid (& d,  1));
-//   assert (   Deck_indexIsValid (& d,  2));
-//   assert ( ! Deck_indexIsValid (& d,  3));
-// }
+  assert ( ! Deck_indexIsValid (& d, -1));
+  assert (   Deck_indexIsValid (& d,  0));
+  assert (   Deck_indexIsValid (& d,  1));
+  assert (   Deck_indexIsValid (& d,  2));
+  assert ( ! Deck_indexIsValid (& d,  3));
+}
 
-// void DeckTest_rangeIsValid (void) {
-//   Deck d; Deck_initFromPips (& d, "2c 3d 4h");
+void DeckTest_rangeIsValid (void) {
+  Deck d; Deck_initFromPips (& d, "2c 3d 4h");
 
-//   assert ( ! Deck_rangeIsValid (& d, -1, 1));
+  assert ( ! Deck_rangeIsValid (& d, -1, 1));
    
-//   assert (   Deck_rangeIsValid (& d, 0, 1));
-//   assert (   Deck_rangeIsValid (& d, 0, 2));
-//   assert (   Deck_rangeIsValid (& d, 0, 3));
-//   assert ( ! Deck_rangeIsValid (& d, 0, 4));
+  assert (   Deck_rangeIsValid (& d, 0, 1));
+  assert (   Deck_rangeIsValid (& d, 0, 2));
+  assert (   Deck_rangeIsValid (& d, 0, 3));
+  assert ( ! Deck_rangeIsValid (& d, 0, 4));
   
-//   assert (   Deck_rangeIsValid (& d, 1, 1));
-//   assert (   Deck_rangeIsValid (& d, 1, 2));
-//   assert ( ! Deck_rangeIsValid (& d, 1, 3));
+  assert (   Deck_rangeIsValid (& d, 1, 1));
+  assert (   Deck_rangeIsValid (& d, 1, 2));
+  assert ( ! Deck_rangeIsValid (& d, 1, 3));
   
-//   assert (   Deck_rangeIsValid (& d, 2, 1));
-//   assert ( ! Deck_rangeIsValid (& d, 2, 2));
+  assert (   Deck_rangeIsValid (& d, 2, 1));
+  assert ( ! Deck_rangeIsValid (& d, 2, 2));
 
-//   assert ( ! Deck_rangeIsValid (& d, 3, 1));
-// }
+  assert ( ! Deck_rangeIsValid (& d, 3, 1));
+}
 
 // //-----------------------------------------------------------------------------
 
