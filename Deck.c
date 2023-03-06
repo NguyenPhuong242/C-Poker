@@ -108,6 +108,34 @@ bool Deck_rangeIsValid(Deck const* deck, int start, int length) {
     return start >= 0 && start + length <= deck->count;
 }
 
+static int Random_intBetween(int left, int right) {
+    return rand() % (right - left + 1) + left;
+}
 
+void Deck_swapCardsAt(Deck* deck, int index1, int index2) {
+    Card temp = deck->cards[index1];
+    deck->cards[index1] = deck->cards[index2];
+    deck->cards[index2] = temp;
+}
 
+void Deck_shuffle(Deck* deck) {
+    int i;
+    for (i = 0; i < deck->length; i++) {
+        int j = Random_intBetween(i, deck->length - 1);
+        Deck_swapCardsAt(deck, i, j);
+    }
+}
 
+void Deck_dealCardsTo(Deck* source, int cardCount, Deck* target) {
+    int i;
+    for (i = cardCount - 1; i >= 0; i--) {
+        Deck_appendCard(target, source->cards[source->length - 1]);
+        Deck_removeCard(source, source->length - 1);
+    }
+}
+
+static int reverseCompareCardBySuitFirst(void const* data1, void const* data2) {
+    Card const* card1 = (Card const*)data1;
+    Card const* card2 = (Card const*)data2;
+    return -Card_compareBySuitFirst(card1, card2);
+}
