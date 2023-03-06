@@ -136,79 +136,79 @@ void DeckTest_rangeIsValid (void) {
 
 // //-----------------------------------------------------------------------------
 
-// void DeckTest_swapCardsAt (void) {
-//   Deck d; Deck_initFromPips (& d, "2c 3d 4h 5s");
-//   Deck_swapCardsAt (& d, 1, 3);
-//   assert (Deck_pipsEqual (& d, "2c 5s 4h 3d"));
-// }
+void DeckTest_swapCardsAt (void) {
+  Deck d; Deck_initFromPips (& d, "2c 3d 4h 5s");
+  Deck_swapCardsAt (& d, 1, 3);
+  assert (Deck_pipsEqual (& d, "2c 5s 4h 3d"));
+}
 
 // //-----------------------------------------------------------------------------
 
-// void DeckTest_sortBySuitFirst (void) {
-//   Deck d; Deck_initFromPips (& d, "8c 4s 7c 3s");
-//   Deck_sortBySuitFirst (& d);
-//   assert (Deck_pipsEqual (& d, "4s 3s 8c 7c"));
-// }
+void DeckTest_sortBySuitFirst (void) {
+  Deck d; Deck_initFromPips (& d, "8c 4s 7c 3s");
+  Deck_sortBySuitFirst (& d);
+  assert (Deck_pipsEqual (& d, "4s 3s 8c 7c"));
+}
 
-// void DeckTest_sortByRankFirst (void) {
-//   Deck d; Deck_initFromPips (& d, "8c 4d 8h 4s");
-//   Deck_sortByRankFirst (& d);
-//   assert (Deck_pipsEqual (& d, "8h 8c 4s 4d"));
-// }
-
-// //-----------------------------------------------------------------------------
-
-// void DeckTest_isSortedByRankFirst (void) {
-//   Deck d1; Deck_initFromPips (& d1, "8h 8c 4s 4d");
-//   Deck d2; Deck_initFromPips (& d2, "8h 8c 4s 5d");
-//   assert (   Deck_isSortedByRankFirst (& d1));
-//   assert ( ! Deck_isSortedByRankFirst (& d2));
-// }
-
-// void DeckTest_isSortedBySuitFirst (void) {
-//   Deck d1; Deck_initFromPips (& d1, "4s 3s 8c 7c");
-//   Deck d2; Deck_initFromPips (& d2, "4s 3s 8c 7d");
-//   assert (   Deck_isSortedBySuitFirst (& d1));
-//   assert ( ! Deck_isSortedBySuitFirst (& d2));
-// }
-
-// void DeckTest_isSortedBySuitFirstWithNoEqual (void) {
-//   Deck d1; Deck_initFromPips (& d1, "4s 3s 8c 7c");
-//   Deck d2; Deck_initFromPips (& d2, "4s 3s 8c 8c");
-//   assert (   Deck_isSortedBySuitFirstWithNoEqual (& d1));
-//   assert ( ! Deck_isSortedBySuitFirstWithNoEqual (& d2));
-// }
-
-// void DeckTest_isSortedByRankWithNoKind (void) {
-//   Deck d1; Deck_initFromPips (& d1, "8h 7c 4s 3d");
-//   Deck d2; Deck_initFromPips (& d2, "8h 7c 4s 4d");
-//   assert (   Deck_isSortedByRankWithNoKind (& d1));
-//   assert ( ! Deck_isSortedByRankWithNoKind (& d2));
-// }
+void DeckTest_sortByRankFirst (void) {
+  Deck d; Deck_initFromPips (& d, "8c 4d 8h 4s");
+  Deck_sortByRankFirst (& d);
+  assert (Deck_pipsEqual (& d, "8h 8c 4s 4d"));
+}
 
 // //-----------------------------------------------------------------------------
 
+void DeckTest_isSortedByRankFirst (void) {
+  Deck d1; Deck_initFromPips (& d1, "8h 8c 4s 4d");
+  Deck d2; Deck_initFromPips (& d2, "8h 8c 4s 5d");
+  assert (   Deck_isSortedByRankFirst (& d1));
+  assert ( ! Deck_isSortedByRankFirst (& d2));
+}
 
-// void DeckTest_printPips (void) {
-//   char * string; size_t length;
-//   FILE * memstream= open_memstream (& string, & length);
-//   Deck d; Deck_initFromPips (& d, "2c 3d 4h 5s");
-//   Deck_printPips (& d, memstream);
-//   fclose (memstream);
-//   assert (strcmp (string, "2c 3d 4h 5s") == 0);
-//   free (string);
-// }
+void DeckTest_isSortedBySuitFirst (void) {
+  Deck d1; Deck_initFromPips (& d1, "4s 3s 8c 7c");
+  Deck d2; Deck_initFromPips (& d2, "4s 3s 8c 7d");
+  assert (   Deck_isSortedBySuitFirst (& d1));
+  assert ( ! Deck_isSortedBySuitFirst (& d2));
+}
+
+void DeckTest_isSortedBySuitFirstWithNoEqual (void) {
+  Deck d1; Deck_initFromPips (& d1, "4s 3s 8c 7c");
+  Deck d2; Deck_initFromPips (& d2, "4s 3s 8c 8c");
+  assert (   Deck_isSortedBySuitFirstWithNoEqual (& d1));
+  assert ( ! Deck_isSortedBySuitFirstWithNoEqual (& d2));
+}
+
+void DeckTest_isSortedByRankWithNoKind (void) {
+  Deck d1; Deck_initFromPips (& d1, "8h 7c 4s 3d");
+  Deck d2; Deck_initFromPips (& d2, "8h 7c 4s 4d");
+  assert (   Deck_isSortedByRankWithNoKind (& d1));
+  assert ( ! Deck_isSortedByRankWithNoKind (& d2));
+}
+
+// //-----------------------------------------------------------------------------
+
+
+void DeckTest_printPips (void) {
+  char * string; size_t length;
+  FILE * memstream= open_memstream (& string, & length);
+  Deck d; Deck_initFromPips (& d, "2c 3d 4h 5s");
+  Deck_printPips (& d, memstream);
+  fclose (memstream);
+  assert (strcmp (string, "2c 3d 4h 5s") == 0);
+  free (string);
+}
 
 
 // //-----------------------------------------------------------------------------
 
-// void DeckTest_dealCardsTo (void) {
-//   Deck d1; Deck_initFromPips (& d1, "2c 3d 4h 5s");
-//   Deck d2; Deck_initFromPips (& d2, "Ah");
-//   Deck_dealCardsTo (& d1, 2, & d2);
-//   assert (Deck_pipsEqual (& d1, "2c 3d"));
-//   assert (Deck_pipsEqual (& d2, "Ah 5s 4h"));
-// }
+void DeckTest_dealCardsTo (void) {
+  Deck d1; Deck_initFromPips (& d1, "2c 3d 4h 5s");
+  Deck d2; Deck_initFromPips (& d2, "Ah");
+  Deck_dealCardsTo (& d1, 2, & d2);
+  assert (Deck_pipsEqual (& d1, "2c 3d"));
+  assert (Deck_pipsEqual (& d2, "Ah 5s 4h"));
+}
 
 // //-----------------------------------------------------------------------------
 
@@ -320,20 +320,20 @@ void DeckTest_runAll (void) {
   DeckTest_popCard();
   DeckTest_initEmpty();
   DeckTest_initComplete();
-//   DeckTest_appendPips();
-//   DeckTest_initFromPips();
-//   DeckTest_pipsEqual();
-//   DeckTest_indexIsValid();
-//   DeckTest_rangeIsValid();
-//   DeckTest_swapCardsAt();
-//   DeckTest_sortBySuitFirst();
-//   DeckTest_sortByRankFirst();
-//   DeckTest_isSortedByRankFirst();
-//   DeckTest_isSortedBySuitFirst();
-//   DeckTest_isSortedBySuitFirstWithNoEqual();
-//   DeckTest_isSortedByRankWithNoKind();
-//   DeckTest_printPips();
-//   DeckTest_dealCardsTo();
+  DeckTest_appendPips();
+  DeckTest_initFromPips();
+  DeckTest_pipsEqual();
+  DeckTest_indexIsValid();
+  DeckTest_rangeIsValid();
+  DeckTest_swapCardsAt();
+  DeckTest_sortBySuitFirst();
+  DeckTest_sortByRankFirst();
+  DeckTest_isSortedByRankFirst();
+  DeckTest_isSortedBySuitFirst();
+  DeckTest_isSortedBySuitFirstWithNoEqual();
+  DeckTest_isSortedByRankWithNoKind();
+  DeckTest_printPips();
+  DeckTest_dealCardsTo();
 //   DeckTest_lengthOfKindAt ();
 //   DeckTest_lengthOfFlushAt(); 
 //   DeckTest_lengthOfRegularStraightAt();

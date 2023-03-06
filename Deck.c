@@ -2,6 +2,7 @@
 #include <assert.h>
 #include <string.h>
 #include "Deck.h"
+#include <stdlib.h>
 
 bool Deck_isEmpty(Deck const * deck){
     return(deck ->length == 0);
@@ -39,24 +40,23 @@ void Deck_initComplete (Deck * deck){
 }
 
 bool Deck_pipsEqual(Deck const * deck, char const pips[]){
-    assert(deck->length == strlen[pips]);
+    assert(deck->length == (int) strlen(pips));
     int i;
-    for(i = deck->length - 1; i >= 0;){
-        if(pips[i] == Deck_popCard(deck)){
-            i = i - 1;
+    bool result;
+    for(i = 0; i < deck->length; i++){
+        if(!Card_pipEquals(deck->cards[i], pips)){
+            result = false;
         }
-        else{
-            return false;
-        }
+        result =  true;
     }
-    return deck->cards[i] == pips[i];
+    return result;
 }
 
 void Deck_printPips (Deck const * deck, FILE * file){
     assert(!Deck_isEmpty(deck));
     int i;
-    for(i = 0; i < deck->length -1; i ++){
-        fprintf(file, "%c%c", deck->cards[i]);
+    for(i = 0; i < deck->length ; i ++){
+        Card_printPip(deck->cards[i], file);
     }
 }
 
@@ -64,52 +64,30 @@ void Deck_appendPips   (Deck * deck, char const pips []){
     assert(!Deck_isFull(deck));
     assert(strlen(pips)!=0);
     int i;
-    for(i = 0; i < deck->length - 1; i++){
+    for(i = 0; i < deck->length ; i++){
         if(strlen(pips)%2==0){
-            if(deck->cards[i] != Card_make(pips[i], pips[i+1])){
+            if(!Card_equals(Card_make(pips[2*i], pips[2*i+1]),deck->cards[i])){   
                 Deck_appendCard(deck, Card_make(pips[i], pips[i+1]));
             }
-            return 0;
-        }
-    }
-    return -1;
-}
-void Deck_initFromPips (Deck * deck, char const pips []){
-    assert(!Deck_isEmpty(deck));
-    int i;
-    if(strlen(pips)%2==0){
-        deck->length = strlen(pips) / 2;
-        for(i = deck->length; i>=0; i--){
-            deck->cards[i] = Card_make(pips[i])
         }
     }
 }
 
-
-// void Deck_appendPips(Deck* deck, char const pips[]) {
-//     char* carddesk = strtok(pips, " ");
-//     while (carddesk != NULL) {
-//         Card card = Card_fromPips(carddesk);
-//         Deck_appendCard(deck, card);
-//         carddesk = strtok(NULL, " ");
-//     }
-// }
-
-// void Deck_initFromPips(Deck* deck, char const pips[]) {
-//     Deck_initEmpty(deck);
-//     Deck_appendPips(deck, pips);
-// }
+void Deck_initFromPips(Deck* deck, char const pips[]) {
+    Deck_initEmpty(deck);
+    Deck_appendPips(deck, pips);
+}
 
 bool Deck_indexIsValid(Deck const* deck, int index) {
-    return index >= 0 && index < deck->count;
+    return index >= 0 && index < deck->length;
 }
 
 bool Deck_rangeIsValid(Deck const* deck, int start, int length) {
-    return start >= 0 && start + length <= deck->count;
+    return start >= 0 && start + length <= deck->length;
 }
 
 static int Random_intBetween(int left, int right) {
-    return rand() % (right - left + 1) + left;
+    return left + rand()%(right-left+1);
 }
 
 void Deck_swapCardsAt(Deck* deck, int index1, int index2) {
@@ -126,23 +104,23 @@ void Deck_shuffle(Deck* deck) {
     }
 }
 
-void Deck_dealCardsTo(Deck* source, int cardCount, Deck* target) {
+void Deck_dealCardsTo(Deck* deck, int cardCount, Deck* target) {
     int i;
     for (i = cardCount - 1; i >= 0; i--) {
-        Deck_appendCard(target, source->cards[source->length - 1]);
-        Deck_removeCard(source, source->length - 1);
+        Deck_appendCard(target, deck->cards[deck->length - 1]);
+        Deck_popCard(deck);
     }
 }
 
 static int reverseCompareCardBySuitFirst(void const* data1, void const* data2) {
-    Card const* card1 = (Card const*)data1;
-    Card const* card2 = (Card const*)data2;
+    Card const* card1 = &data1;
+    Card const* card2 = &data2;
     return -Card_compareBySuitFirst(card1, card2);
 }
 
 static int reverseCompareCardByRankFirst(void const* data1, void const* data2) {
-    Card const* card1 = (Card const*)data1;
-    Card const* card2 = (Card const*)data2;
+    Card const* card1 = &data1;
+    Card const* card2 = &data2;
     return -Card_compareByRankFirst(card1, card2);
 }
 
