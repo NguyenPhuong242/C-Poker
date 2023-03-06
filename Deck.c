@@ -86,3 +86,28 @@ void Deck_initFromPips (Deck * deck, char const pips []){
 }
 
 
+// void Deck_appendPips(Deck* deck, char const pips[]) {
+//     char* carddesk = strtok(pips, " ");
+//     while (carddesk != NULL) {
+//         Card card = Card_fromPips(carddesk);
+//         Deck_appendCard(deck, card);
+//         carddesk = strtok(NULL, " ");
+//     }
+// }
+
+// void Deck_initFromPips(Deck* deck, char const pips[]) {
+//     Deck_initEmpty(deck);
+//     Deck_appendPips(deck, pips);
+// }
+
+bool Deck_indexIsValid(Deck const* deck, int index) {
+    return index >= 0 && index < deck->count;
+}
+
+bool Deck_rangeIsValid(Deck const* deck, int start, int length) {
+    return start >= 0 && start + length <= deck->count;
+}
+
+
+
+
