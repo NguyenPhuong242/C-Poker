@@ -139,3 +139,19 @@ static int reverseCompareCardBySuitFirst(void const* data1, void const* data2) {
     Card const* card2 = (Card const*)data2;
     return -Card_compareBySuitFirst(card1, card2);
 }
+
+static int reverseCompareCardByRankFirst(void const* data1, void const* data2) {
+    Card const* card1 = (Card const*)data1;
+    Card const* card2 = (Card const*)data2;
+    return -Card_compareByRankFirst(card1, card2);
+}
+
+void Deck_sortBySuitFirst(Deck* deck) {
+    qsort(deck->cards, deck->length, sizeof(Card), reverseCompareCardBySuitFirst);
+}
+
+void Deck_sortByRankFirst(Deck* deck) {
+    qsort(deck->cards, deck->length, sizeof(Card), reverseCompareCardByRankFirst);
+}
+
+
